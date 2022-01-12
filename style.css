@@ -1,0 +1,17 @@
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+
+.btn img{
+    display: inline-flex;
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 20%;
+    background-color: aliceblue;
+    outline: none;
+    gap: 5em;
+}
