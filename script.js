@@ -1,4 +1,6 @@
 let roundWinner = '';
+let playerScore=0;
+let pcScore=0;
 
 function computerPlay(){
     const play = Math.floor(Math.random()*3);
@@ -20,46 +22,60 @@ function computerPlay(){
 }
 
 function playRound(playerSelection, computerSelection) {
+    if (playerSelection == null) return ('no input detected');
     playerSelection = playerSelection.toUpperCase();
-    if (playerSelection == computerSelection) {
+      if (playerSelection == computerSelection) {
         roundWinner = 'tie';
-        console.log(roundWinner + ' ' + playerSelection + computerSelection);
+        return(roundWinner + ' ' + playerSelection + computerSelection);
       }
-      if (
+      else if (
         (playerSelection == 'ROCK' && computerSelection == 'SCISSORS') ||
         (playerSelection == 'SCISSORS' && computerSelection == 'PAPER') ||
         (playerSelection == 'PAPER' && computerSelection == 'ROCK')
       ) {
         roundWinner = 'player';
-        console.log(roundWinner + ' ' + playerSelection + computerSelection);
+        playerScore++;
+        return(roundWinner + ' won and got ' + playerScore + ' points. ' + playerSelection + ' ' + computerSelection);
       }
-      if (
+      else if (
         (computerSelection == 'ROCK' && playerSelection == 'SCISSORS') ||
         (computerSelection == 'SCISSORS' && playerSelection == 'PAPER') ||
         (computerSelection == 'PAPER' && playerSelection == 'ROCK')
       ) {
-        roundWinner = 'computer';
-        console.log(roundWinner + ' ' + playerSelection + computerSelection);
-      } 
+        roundWinner = 'pc';
+        pcScore++;
+        return(roundWinner + ' won and got ' + pcScore + ' points. ' + playerSelection + ' ' + computerSelection);
+      }
+      return ('please give a valid input');
 }
 
-function scoreIncrease(scorer){
+function game () {
+    for (i = 0; i < 5; i ++) {
+        let sign = prompt("What's your move?");
+        alert(playRound(sign, computerPlay()));
+    }
+}
+
+game ();
+
+
+/*function scoreIncrease(scorer){
     let playerScore=0;
     let pcScore=0;
     if (scorer=='player'){
         return () => {
             playerScore++;
+            console.log(playerScore);
       };
     }
     if (scorer=='pc') {
         return () => {
             pcScore++;
+            console.log(pcScore);
         };
     }
 }
-
-
+*/
   
-  const playerSelection = "rock";
-  const computerSelection = computerPlay();
-  console.log(playRound(playerSelection, computerSelection));
+  //const playerSelection = "rock";
+  //console.log(playRound(playerSelection, computerPlay()));
