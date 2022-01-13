@@ -1,4 +1,4 @@
-let roundWinner = '';
+
 let playerScore=0;
 let pcScore=0;
 
@@ -23,10 +23,10 @@ function computerPlay(){
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection == null) return ('no input detected');
+    let roundWinner = '';
     playerSelection = playerSelection.toUpperCase();
       if (playerSelection == computerSelection) {
         roundWinner = 'tie';
-        return(roundWinner + ' ' + playerSelection + computerSelection);
       }
       else if (
         (playerSelection == 'ROCK' && computerSelection == 'SCISSORS') ||
@@ -35,7 +35,6 @@ function playRound(playerSelection, computerSelection) {
       ) {
         roundWinner = 'player';
         playerScore++;
-        return(roundWinner + ' won and got ' + playerScore + ' points. ' + playerSelection + ' ' + computerSelection);
       }
       else if (
         (computerSelection == 'ROCK' && playerSelection == 'SCISSORS') ||
@@ -44,20 +43,31 @@ function playRound(playerSelection, computerSelection) {
       ) {
         roundWinner = 'pc';
         pcScore++;
-        return(roundWinner + ' won and got ' + pcScore + ' points. ' + playerSelection + ' ' + computerSelection);
       }
-      return ('please give a valid input');
+      return (roundWinner);
 }
 
-function game () {
-    for (i = 0; i < 5; i ++) {
-        let sign = prompt("What's your move?");
-        alert(playRound(sign, computerPlay()));
-    }
+const btn = document.querySelectorAll('.btn');
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        displayResult(playRound(button.getAttribute('id'), computerPlay()));
+      });
+});
+
+function displayResult(winner) {
+    let points = 0;
+    if (winner == 'player') points = playerScore;
+    else if (winner == 'pc') points = pcScore;
+    else if (winner == 'tie') points = 'same';
+    //console.log(result.id);
+    const result = document.querySelector(".result");
+    result.textContent=`The winner is ${winner}. ${winner} has 
+        ${points} points!`;
+    const scorePlayer = document.getElementById('player-score');
+    scorePlayer.textContent = `Player Score: ${playerScore}`;
+    const scorePc = document.getElementById('comp-score');
+    scorePc.textContent = `Computer Score: ${pcScore}`;
 }
-
-game ();
-
 
 /*function scoreIncrease(scorer){
     let playerScore=0;

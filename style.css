@@ -8,10 +8,9 @@
 .btn img{
     display: inline-flex;
     margin: 20px;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 20%;
-    background-color: aliceblue;
     outline: none;
     gap: 5em;
 }
